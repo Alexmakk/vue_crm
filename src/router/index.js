@@ -51,6 +51,12 @@ const routes = [
     name: 'detail',
     meta: { layout: 'main' },
     component: () => import('../views/Detail.vue')
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    meta: { layout: 'main' },
+    component: () => import('../views/Profile.vue')
   }
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
