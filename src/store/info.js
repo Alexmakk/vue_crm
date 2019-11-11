@@ -4,26 +4,26 @@ export default {
   state: {
     info: {}
   },
-	mutations: {
-		setInfo(state, data) {
-			state.info = data;
-			console.log(data)
-		},
-		clearInfo(state) {
-			state.info = {}
-		}
-	},
+  mutations: {
+    setInfo(state, data) {
+      state.info = data;
+      // console.log(data);
+    },
+    clearInfo(state) {
+      state.info = {};
+    }
+  },
   actions: {
     async fetchInfo({ dispatch, commit }) {
-			try {
-				const uid = await dispatch('getUid');
-				const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val();
-				commit('setInfo', info);
-			} catch (e) {
-				console.log(e)
-			}
+      try {
+        const uid = await dispatch('getUid');
+        const info = (await firebase.database().ref(`/users/${uid}/info`).once('value')).val();
+        commit('setInfo', info);
+      } catch (e) {
+        console.log(e);
+      }
     }
-	},
+  },
   getters: {
     info: state => state.info
   }
