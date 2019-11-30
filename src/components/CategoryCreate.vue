@@ -48,7 +48,6 @@
 import {required, minValue} from 'vuelidate/lib/validators';
 
 export default {
-
   data: () => ({
     title: '',
     limit: 100

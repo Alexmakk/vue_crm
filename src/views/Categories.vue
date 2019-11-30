@@ -8,8 +8,16 @@
       <div
        v-else
        class="row">
+
        <CategoryCreate @created="addNewCategory"/>
-       <CategoryEdit />
+
+       <CategoryEdit
+        v-if="categories.length"
+        :key="categories.length + updateCount"
+        :categories="categories"
+        @updated="updateCategories"
+       />
+       <p v-else class="center">Категорий пока нет</p>
       </div>
     </section>
   </div>
@@ -26,16 +34,22 @@ export default {
   },
   data: () =>({
     categories: [],
-    loading: true
+    loading: true,
+    updateCount: 0
   }),
   async mounted() {
     this.categories = await this.$store.dispatch('fetchCategories')
     this.loading = false
-    console.log(this.categories)
   },
   methods: {
     addNewCategory(category) {
       this.categories.push(category);
+    },
+    updateCategories(category) {
+      const index = this.categories.findIndex(c => c.id === category.id)
+      this.categories[index].title = category.title
+      this.categories[index].limit = category.limit
+      this.updateCount++
     }
   }
   }
