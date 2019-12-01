@@ -3,9 +3,9 @@
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
         <span class="card-title">Счет в валюте</span>
-        <p 
+        <p
         v-for="cur in currencies"
-        :key="cur" 
+        :key="cur"
         class="currency-line">
           <span>{{getCurrency(cur) | currency(cur)}}</span>
         </p>
@@ -21,12 +21,12 @@ export default {
   }),
   computed: {
     base() {
-      return this.$store.getters.info.bill/(this.rates['RUB']/this.rates['EUR'])
+      return this.$store.getters.info.bill/(this.rates['RUB'].toFixed(5)/this.rates['EUR'])
     }
   },
   methods: {
     getCurrency(currency){
-      return Math.floor(this.base * this.rates[currency])
+      return Math.floor(this.base * this.rates[currency].toFixed(5))
     }
   }
 }
