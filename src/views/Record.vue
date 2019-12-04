@@ -131,29 +131,29 @@ export default {
         this.$v.$touch()
         return
       }
-    if (this.canCreateRecord){
-      try {
-        this.$store.dispatch('createRecord', {
-          categoryId: this.category,
-          amount: this.amount,
-          description: this.description,
-          type: this.type,
-          date: new Date().toJSON()
-        })
-        const bill = this.type === 'income'
-        ? this.info.bill + this.amount
-        : this.info.bill - this.amount
+      if (this.canCreateRecord){
+        try {
+          this.$store.dispatch('createRecord', {
+            categoryId: this.category,
+            amount: this.amount,
+            description: this.description,
+            type: this.type,
+            date: new Date().toJSON()
+          })
+          const bill = this.type === 'income'
+          ? this.info.bill + this.amount
+          : this.info.bill - this.amount
 
-        await this.$store.dispatch('updateInfo', {bill})
-        this.$message('Запись успешно создана')
-        this.$v.$reset()
-        this.amount = 1
-        this.description = ''
-      } catch (e) {}
+          await this.$store.dispatch('updateInfo', {bill})
+          this.$message('Запись успешно создана')
+          this.$v.$reset()
+          this.amount = 1
+          this.description = ''
+        } catch (e) {}
 
-    } else {
-      this.$message(`Недостаточно средств на счете (${this.amount - this.info.bill})`)
-    }
+      } else {
+        this.$message(`Недостаточно средств на счете (${this.amount - this.info.bill})`)
+      }
 
     }
   },
