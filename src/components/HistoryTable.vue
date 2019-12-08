@@ -44,6 +44,9 @@ export default {
       required: true,
       type: Array
     }
+  },
+  mounted() {
+    // console.log(this.records)
   }
 }
 </script>
